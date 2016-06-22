@@ -3,9 +3,10 @@ class Movie {
 }
 class Rental {
 + DaysRented int
++ float64 GetCharge()
 }
 class Customer {
 + string Statement()
 }
-Customer "1" -l-> "*" Rental
-Rental "*" -l-> "1" Movie
+Customer -l-> "*" Rental
+Rental -l-> "1" Movie

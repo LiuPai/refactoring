@@ -39,7 +39,7 @@ func (c *Customer) Statement() string {
 	)
 	result := "Rental Record for " + c.Name() + "\n"
 	for _, each := range c.rentals {
-		thisAmount := amountFor(each)
+		thisAmount := each.GetCharge()
 
 		// add frequentrenterpoints renter points
 		frequentRenterPoints++
@@ -60,8 +60,4 @@ func (c *Customer) Statement() string {
 	result += "You earned " + strconv.Itoa(frequentRenterPoints) +
 		" frequentrenterpoints renter points"
 	return result
-}
-
-func amountFor(aRental *rental.Rental) float64 {
-	return aRental.GetCharge()
 }
