@@ -8,6 +8,8 @@ class Rental {
 }
 class Customer {
 + string Statement()
++ float64 GetTotalCharge()
++ int GetTotalFrequentRenterPoints()
 }
 Customer -l-> "*" Rental
 Rental -l-> "1" Movie
