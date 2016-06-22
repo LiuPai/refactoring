@@ -1,5 +1,7 @@
 class Movie {
 + PriceCode int
++ float64 GetCharge(days int)
++ int GetFrequentRenterPoints(days int)
 }
 class Rental {
 + DaysRented int
