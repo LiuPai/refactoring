@@ -39,8 +39,6 @@ func (c *Customer) Statement() string {
 	)
 	result := "Rental Record for " + c.Name() + "\n"
 	for _, each := range c.rentals {
-		thisAmount := each.GetCharge()
-
 		// add frequentrenterpoints renter points
 		frequentRenterPoints++
 		// add bonus for a two day new release rental
@@ -51,8 +49,8 @@ func (c *Customer) Statement() string {
 
 		// show figures for this rental
 		result += "\t" + each.Movie().Title() + "\t" +
-			strconv.FormatFloat(thisAmount, 'f', -1, 64) + "\n"
-		totalAmount += thisAmount
+			strconv.FormatFloat(each.GetCharge(), 'f', -1, 64) + "\n"
+		totalAmount += each.GetCharge()
 	}
 	// add footer lines
 	result += "Amount owed is " +
