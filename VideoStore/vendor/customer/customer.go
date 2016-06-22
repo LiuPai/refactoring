@@ -63,21 +63,5 @@ func (c *Customer) Statement() string {
 }
 
 func amountFor(aRental *rental.Rental) float64 {
-	var result float64
-	// determine amounts for each line
-	switch aRental.Movie().PriceCode {
-	case movie.Regalur:
-		result += 2
-		if aRental.DaysRented() > 2 {
-			result += float64(aRental.DaysRented()-2) * 1.5
-		}
-	case movie.NewRelease:
-		result += float64(aRental.DaysRented() * 3)
-	case movie.Childrens:
-		result += 1.5
-		if aRental.DaysRented() > 3 {
-			result += float64(aRental.DaysRented()-3) * 1.5
-		}
-	}
-	return result
+	return aRental.GetCharge()
 }

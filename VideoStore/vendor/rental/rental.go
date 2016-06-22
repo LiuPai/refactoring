@@ -27,3 +27,24 @@ func (r *Rental) DaysRented() int {
 func (r *Rental) Movie() *movie.Movie {
 	return r.movie
 }
+
+// GetCharge return price of this rental
+func (r *Rental) GetCharge() float64 {
+	var result float64
+	// determine amounts for each line
+	switch r.Movie().PriceCode {
+	case movie.Regalur:
+		result += 2
+		if r.DaysRented() > 2 {
+			result += float64(r.DaysRented()-2) * 1.5
+		}
+	case movie.NewRelease:
+		result += float64(r.DaysRented() * 3)
+	case movie.Childrens:
+		result += 1.5
+		if r.DaysRented() > 3 {
+			result += float64(r.DaysRented()-3) * 1.5
+		}
+	}
+	return result
+}
