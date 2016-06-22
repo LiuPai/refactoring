@@ -39,23 +39,7 @@ func (c *Customer) Statement() string {
 	)
 	result := "Rental Record for " + c.Name() + "\n"
 	for _, each := range c.rentals {
-		var (
-			thisAmount float64
-		)
-		switch each.Movie().PriceCode {
-		case movie.Regalur:
-			thisAmount += 2
-			if each.DaysRented() > 2 {
-				thisAmount += float64(each.DaysRented()-2) * 1.5
-			}
-		case movie.NewRelease:
-			thisAmount += float64(each.DaysRented() * 3)
-		case movie.Childrens:
-			thisAmount += 1.5
-			if each.DaysRented() > 3 {
-				thisAmount += float64(each.DaysRented()-3) * 1.5
-			}
-		}
+		thisAmount := amountFor(each)
 
 		// add frequentrenterpoints renter points
 		frequentRenterPoints++
@@ -76,4 +60,24 @@ func (c *Customer) Statement() string {
 	result += "You earned " + strconv.Itoa(frequentRenterPoints) +
 		" frequentrenterpoints renter points"
 	return result
+}
+
+func amountFor(each *rental.Rental) float64 {
+	var thisAmount float64
+	// determine amounts for each line
+	switch each.Movie().PriceCode {
+	case movie.Regalur:
+		thisAmount += 2
+		if each.DaysRented() > 2 {
+			thisAmount += float64(each.DaysRented()-2) * 1.5
+		}
+	case movie.NewRelease:
+		thisAmount += float64(each.DaysRented() * 3)
+	case movie.Childrens:
+		thisAmount += 1.5
+		if each.DaysRented() > 3 {
+			thisAmount += float64(each.DaysRented()-3) * 1.5
+		}
+	}
+	return thisAmount
 }
