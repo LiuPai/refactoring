@@ -62,22 +62,22 @@ func (c *Customer) Statement() string {
 	return result
 }
 
-func amountFor(each *rental.Rental) float64 {
-	var thisAmount float64
+func amountFor(aRental *rental.Rental) float64 {
+	var result float64
 	// determine amounts for each line
-	switch each.Movie().PriceCode {
+	switch aRental.Movie().PriceCode {
 	case movie.Regalur:
-		thisAmount += 2
-		if each.DaysRented() > 2 {
-			thisAmount += float64(each.DaysRented()-2) * 1.5
+		result += 2
+		if aRental.DaysRented() > 2 {
+			result += float64(aRental.DaysRented()-2) * 1.5
 		}
 	case movie.NewRelease:
-		thisAmount += float64(each.DaysRented() * 3)
+		result += float64(aRental.DaysRented() * 3)
 	case movie.Childrens:
-		thisAmount += 1.5
-		if each.DaysRented() > 3 {
-			thisAmount += float64(each.DaysRented()-3) * 1.5
+		result += 1.5
+		if aRental.DaysRented() > 3 {
+			result += float64(aRental.DaysRented()-3) * 1.5
 		}
 	}
-	return thisAmount
+	return result
 }
