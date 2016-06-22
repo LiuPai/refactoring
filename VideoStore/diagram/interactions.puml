@@ -1,0 +1,12 @@
+hide footbox
+[->aCustomer: statement
+activate aCustomer
+
+aCustomer->aCustomer: [for all rentals]
+activate aCustomer
+
+aCustomer->aRental: Movie()
+aCustomer->aMovie: PriceCode()
+aCustomer->aRental: DaysRented()
+deactivate aCustomer
+deactivate aCustomer

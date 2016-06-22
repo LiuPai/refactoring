@@ -1,0 +1,11 @@
+class Movie {
++ PriceCode int
+}
+class Rental {
++ DaysRented int
+}
+class Customer {
++ string Statement()
+}
+Customer "1" -l-> "*" Rental
+Rental "*" -l-> "1" Movie
