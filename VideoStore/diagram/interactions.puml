@@ -2,11 +2,16 @@ hide footbox
 [->aCustomer: statement
 activate aCustomer
 
-aCustomer->aCustomer: [for all rentals]
+aCustomer->aCustomer: *[for all rentals]
 activate aCustomer
 
-aCustomer->aRental: Movie()
-aCustomer->aMovie: PriceCode()
-aCustomer->aRental: DaysRented()
+aCustomer->aRental: GetCharge()
+activate aRental
+aRental->aMovie: PriceCode
+deactivate aRental
+aCustomer->aRental: getFrequentRenterPoints()
+activate aRental
 deactivate aCustomer
+aRental->aMovie: PriceCode
+deactivate aRental
 deactivate aCustomer

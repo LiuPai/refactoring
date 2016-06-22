@@ -3,7 +3,6 @@ package customer
 import (
 	"strconv"
 
-	"movie"
 	"rental"
 )
 
@@ -39,15 +38,8 @@ func (c *Customer) Statement() string {
 	)
 	result := "Rental Record for " + c.Name() + "\n"
 	for _, each := range c.rentals {
-		// add frequentrenterpoints renter points
-		frequentRenterPoints++
-		// add bonus for a two day new release rental
-		if each.Movie().PriceCode == movie.NewRelease &&
-			each.DaysRented() > 1 {
-			frequentRenterPoints++
-		}
-
 		// show figures for this rental
+		frequentRenterPoints += each.GetFrequentRenterPoints()
 		result += "\t" + each.Movie().Title() + "\t" +
 			strconv.FormatFloat(each.GetCharge(), 'f', -1, 64) + "\n"
 		totalAmount += each.GetCharge()

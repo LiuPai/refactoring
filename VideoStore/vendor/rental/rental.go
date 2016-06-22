@@ -48,3 +48,12 @@ func (r *Rental) GetCharge() float64 {
 	}
 	return result
 }
+
+// GetFrequentRenterPoints return frequentrenterpoints this rental got
+func (r *Rental) GetFrequentRenterPoints() int {
+	if r.Movie().PriceCode == movie.NewRelease &&
+		r.DaysRented() > 1 {
+		return 2
+	}
+	return 1
+}
