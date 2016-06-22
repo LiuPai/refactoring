@@ -32,22 +32,26 @@ func (c *Customer) Name() string {
 
 // Statement return string statement of customer order
 func (c *Customer) Statement() string {
-	var (
-		totalAmount          float64
-		frequentRenterPoints int
-	)
+	var frequentRenterPoints int
 	result := "Rental Record for " + c.Name() + "\n"
 	for _, each := range c.rentals {
 		// show figures for this rental
 		frequentRenterPoints += each.GetFrequentRenterPoints()
 		result += "\t" + each.Movie().Title() + "\t" +
 			strconv.FormatFloat(each.GetCharge(), 'f', -1, 64) + "\n"
-		totalAmount += each.GetCharge()
 	}
 	// add footer lines
 	result += "Amount owed is " +
-		strconv.FormatFloat(totalAmount, 'f', -1, 64) + "\n"
+		strconv.FormatFloat(c.getTotalCharge(), 'f', -1, 64) + "\n"
 	result += "You earned " + strconv.Itoa(frequentRenterPoints) +
 		" frequentrenterpoints renter points"
+	return result
+}
+
+func (c *Customer) getTotalCharge() float64 {
+	var result float64
+	for _, each := range c.rentals {
+		result += each.GetCharge()
+	}
 	return result
 }
