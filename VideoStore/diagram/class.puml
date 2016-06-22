@@ -8,6 +8,7 @@ class Rental {
 }
 class Customer {
 + string Statement()
++ string HTMLStatement()
 + float64 GetTotalCharge()
 + int GetTotalFrequentRenterPoints()
 }

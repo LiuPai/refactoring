@@ -61,6 +61,7 @@ func init() {
 
 func main() {
 	for _, c := range customers {
-		println(c.Statement())
+		//println(c.Statement())
+		println(c.HTMLStatement())
 	}
 }

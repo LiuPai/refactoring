@@ -46,6 +46,24 @@ func (c *Customer) Statement() string {
 	return result
 }
 
+// HTMLStatement return HTML style statement of customer order
+func (c *Customer) HTMLStatement() string {
+	result := "<H1>Rentals for <EM>" + c.Name() + "</EM></H1><P>"
+	for _, each := range c.rentals {
+		// show figures for this rental
+		result += each.Movie().Title() + ": " +
+			strconv.FormatFloat(each.GetCharge(), 'f', -1, 64) + "<BR>"
+	}
+	// add footer lines
+	result += "<P>You owe <EM>" +
+		strconv.FormatFloat(c.getTotalCharge(), 'f', -1, 64) +
+		"</EM></P>"
+	result += "On this rental you earned <EM>" +
+		strconv.Itoa(c.getTotalFrequentRenterPoints()) +
+		"</EM> frequent renter points</P>"
+	return result
+}
+
 func (c *Customer) getTotalCharge() float64 {
 	var result float64
 	for _, each := range c.rentals {
