@@ -1,0 +1,22 @@
+interface Price {
++ float64 GetCharge()
+}
+
+class RegularPrice {
++ float64 GetCharge()
+}
+class ChildrensPrice {
++ float64 GetCharge()
+}
+class NewReleasePrice {
++ float64 GetCharge()
+}
+RegularPrice-u-|>Price
+ChildrensPrice-u-|>Price
+NewReleasePrice-u-|>Price
+
+class Movie {
++ float64 GetCharge()
+}
+Movie-r->Price
+note top of Movie: return price.GetCharge()

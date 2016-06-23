@@ -9,10 +9,29 @@ class Rental {
 + int GetFrequentRenterPoints()
 }
 class Customer {
+- name string
 + string Statement()
 + string HTMLStatement()
 + float64 GetTotalCharge()
 + int GetTotalFrequentRenterPoints()
 }
+interface Price {
++ float64 GetCharge(days int)
++ int GetFrequentRenterPoints(days int)
+}
+class ChildrensPrice {
++ float64 GetCharge(days int)
+}
+class NewReleasePrice {
++ float64 GetCharge(days int)
++ int GetFrequentRenterPoints(days int)
+}
+class RegularPrice {
++ float64 GetCharge(days int)
+}
 Customer -l-> "*" Rental
-Rental -l-> "1" Movie
+Rental -u-> "1" Movie
+Movie -r-> "1" Price
+ChildrensPrice -u-|> Price
+NewReleasePrice -u-|> Price
+RegularPrice -u-|> Price

@@ -7,7 +7,10 @@ activate aCustomer
 
 aCustomer->aRental: *[for all rentals] GetCharge()
 activate aRental
-aRental->aMovie: PriceCode
+aRental->aMovie: GetCharge(days)
+activate aMovie
+aMovie->aPrice: GetCharge(days)
+deactivate aMovie
 deactivate aRental
 deactivate aCustomer
 
@@ -15,7 +18,10 @@ aCustomer->aCustomer: GetTotalFrequentRenterPoints()
 activate aCustomer
 aCustomer->aRental: *[for all rentals] GetFrequentRenterPoints()
 activate aRental
+aRental->aMovie: GetFrequentRenterPoints(days)
+activate aMovie
+aMovie->aPrice: GetFrequentRenterPoints(days)
+deactivate aMovie
 deactivate aCustomer
-aRental->aMovie: PriceCode
 deactivate aRental
 deactivate aCustomer
