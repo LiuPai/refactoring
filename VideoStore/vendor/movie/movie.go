@@ -2,7 +2,7 @@ package movie
 
 // move categories
 const (
-	Regalur = iota
+	Regular = iota
 	NewRelease
 	Childrens
 )
@@ -31,7 +31,7 @@ func (m *Movie) GetCharge(daysRented int) float64 {
 	var result float64
 	// determine amounts for each line
 	switch m.PriceCode {
-	case Regalur:
+	case Regular:
 		result += 2
 		if daysRented > 2 {
 			result += float64(daysRented-2) * 1.5
